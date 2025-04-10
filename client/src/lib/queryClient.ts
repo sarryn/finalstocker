@@ -1,5 +1,6 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
 import { mockData } from "./mockData";
+import type { Product, Category, Location, Inventory, Supplier, Transaction, Payment } from "../types";
 
 // Mock API request function that returns sample data instead of making actual API calls
 export async function apiRequest(
@@ -19,10 +20,9 @@ export async function apiRequest(
 }
 
 // Custom query function that uses mock data instead of making real API calls
-export const getQueryFn: <T>(options: { 
+export const getQueryFn = <T,>(options: { 
   on401: "returnNull" | "throw";
-}) => QueryFunction<T> = 
-  () => 
+}): QueryFunction<T> => 
   async ({ queryKey }) => {
     console.log(`Fetching mock data for query key: ${queryKey[0]}`);
     
@@ -35,41 +35,41 @@ export const getQueryFn: <T>(options: {
     
     // Return the appropriate mock data based on the endpoint
     if (endpoint.includes("products")) {
-      return id ? mockData.products.find((p: any) => p.id === id) : mockData.products;
+      return (id ? mockData.products.find(p => p.id === id) : mockData.products) as unknown as T;
     } 
     else if (endpoint.includes("categories")) {
-      return id ? mockData.categories.find((c: any) => c.id === id) : mockData.categories;
+      return (id ? mockData.categories.find(c => c.id === id) : mockData.categories) as unknown as T;
     }
     else if (endpoint.includes("inventory")) {
-      return id ? mockData.inventory.find((i: any) => i.id === id) : mockData.inventory;
+      return (id ? mockData.inventory.find(i => i.id === id) : mockData.inventory) as unknown as T;
     }
     else if (endpoint.includes("suppliers")) {
-      return id ? mockData.suppliers.find((s: any) => s.id === id) : mockData.suppliers;
+      return (id ? mockData.suppliers.find(s => s.id === id) : mockData.suppliers) as unknown as T;
     }
     else if (endpoint.includes("locations")) {
-      return id ? mockData.locations.find((l: any) => l.id === id) : mockData.locations;
+      return (id ? mockData.locations.find(l => l.id === id) : mockData.locations) as unknown as T;
     }
     else if (endpoint.includes("transactions")) {
-      return id ? mockData.transactions.find((t: any) => t.id === id) : mockData.transactions;
+      return (id ? mockData.transactions.find(t => t.id === id) : mockData.transactions) as unknown as T;
     }
     else if (endpoint.includes("payments")) {
-      return id ? mockData.payments.find((p: any) => p.id === id) : mockData.payments;
+      return (id ? mockData.payments.find(p => p.id === id) : mockData.payments) as unknown as T;
     }
     else if (endpoint.includes("activity")) {
-      return mockData.activityLogs;
+      return mockData.activityLogs as unknown as T;
     }
     else if (endpoint.includes("analytics/low-stock")) {
-      return mockData.lowStockItems;
+      return mockData.lowStockItems as unknown as T;
     }
     else if (endpoint.includes("analytics/inventory-value")) {
-      return { value: 2850000 };
+      return { value: 2850000 } as unknown as T;
     }
     else if (endpoint.includes("analytics/inventory-count")) {
-      return { count: 1254 };
+      return { count: 1254 } as unknown as T;
     }
     
     // Default: return empty array
-    return [];
+    return [] as unknown as T;
   };
 
 export const queryClient = new QueryClient({

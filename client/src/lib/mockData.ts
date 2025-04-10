@@ -1,7 +1,8 @@
 // Mock data for use in frontend development
 // This file simulates the data that would normally come from the backend API
+import type { MockData } from '../types';
 
-export const mockData = {
+export const mockData: MockData = {
   // Categories
   categories: [
     { id: 1, name: "Electronics", description: "Electronic devices and accessories", createdAt: "2023-01-15T10:30:00Z" },
@@ -375,16 +376,22 @@ export const mockData = {
         id: 6, 
         name: "Cooking Oil (1L)", 
         sku: "GROC-OIL-002", 
+        description: "Refined sunflower oil",
         categoryId: 3, 
         purchasePrice: 120, 
-        sellingPrice: 180
+        sellingPrice: 180,
+        gstRate: 5,
+        createdAt: "2023-01-20T10:15:00Z",
+        imageUrl: null
       },
       inventory: { 
         id: 16, 
         productId: 6, 
         locationId: 2, 
         quantity: 2, 
-        minQuantity: 30
+        minQuantity: 30,
+        maxQuantity: 200,
+        updatedAt: "2023-02-01T11:15:00Z"
       }
     },
     { 
@@ -392,16 +399,22 @@ export const mockData = {
         id: 2, 
         name: "Laptop", 
         sku: "ELEC-LP-002", 
+        description: "Powerful laptop for business and gaming",
         categoryId: 1, 
         purchasePrice: 45000, 
-        sellingPrice: 60000
+        sellingPrice: 60000,
+        gstRate: 18,
+        createdAt: "2023-01-20T09:15:00Z",
+        imageUrl: null
       },
       inventory: { 
         id: 2, 
         productId: 2, 
         locationId: 1, 
         quantity: 10, 
-        minQuantity: 3
+        minQuantity: 3,
+        maxQuantity: 20,
+        updatedAt: "2023-02-01T10:05:00Z"
       }
     },
     { 
@@ -409,16 +422,22 @@ export const mockData = {
         id: 8, 
         name: "Wooden Table", 
         sku: "FURN-TBL-002", 
+        description: "Solid wood dining table",
         categoryId: 4, 
         purchasePrice: 8000, 
-        sellingPrice: 12000
+        sellingPrice: 12000,
+        gstRate: 18,
+        createdAt: "2023-01-20T10:45:00Z",
+        imageUrl: null
       },
       inventory: { 
         id: 10, 
         productId: 8, 
         locationId: 1, 
         quantity: 10, 
-        minQuantity: 2
+        minQuantity: 2,
+        maxQuantity: 20,
+        updatedAt: "2023-02-01T10:45:00Z"
       }
     },
   ]
