@@ -137,22 +137,34 @@ export default function InventoryTable() {
                 </div>
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                SKU
+                <div className="flex items-center">
+                  <i className="ri-barcode-line mr-1"></i> SKU
+                </div>
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Category
+                <div className="flex items-center">
+                  <i className="ri-price-tag-3-line mr-1"></i> Category
+                </div>
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Stock
+                <div className="flex items-center">
+                  <i className="ri-stack-line mr-1"></i> Stock
+                </div>
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Price
+                <div className="flex items-center">
+                  <i className="ri-money-rupee-circle-line mr-1"></i> Price
+                </div>
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Value
+                <div className="flex items-center">
+                  <i className="ri-funds-line mr-1"></i> Value
+                </div>
               </th>
               <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Actions
+                <div className="flex items-center justify-end">
+                  <i className="ri-tools-line mr-1"></i> Actions
+                </div>
               </th>
             </tr>
           </thead>
