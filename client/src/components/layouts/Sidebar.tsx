@@ -23,8 +23,8 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   return (
     <>
       {/* Desktop Sidebar */}
-      <aside className="hidden md:flex md:flex-col w-64 bg-primary-800 text-white">
-        <div className="flex items-center justify-center h-16 border-b border-primary-900">
+      <aside className="hidden md:flex md:flex-col w-64 bg-blue-900 text-white shadow-lg">
+        <div className="flex items-center justify-center h-16 border-b border-blue-950 bg-blue-950">
           <h1 className="text-xl font-bold">InvSync</h1>
         </div>
         <nav className="flex-1 overflow-y-auto py-4">
@@ -35,11 +35,11 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                   <a
                     className={`flex items-center px-6 py-3 text-white ${
                       location === item.path
-                        ? "bg-primary-900"
-                        : "hover:bg-primary-700"
+                        ? "bg-blue-950 border-l-4 border-blue-400"
+                        : "hover:bg-blue-800 border-l-4 border-transparent"
                     }`}
                   >
-                    <i className={`${item.icon} mr-3 text-lg`}></i>
+                    <i className={`${item.icon} mr-3 text-lg ${location === item.path ? "text-blue-300" : "text-blue-300"}`}></i>
                     <span>{item.label}</span>
                   </a>
                 </Link>
@@ -47,10 +47,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             ))}
           </ul>
         </nav>
-        <div className="p-4 border-t border-primary-900">
+        <div className="p-4 border-t border-blue-950 bg-blue-950">
           <div className="flex items-center">
-            <div className="w-8 h-8 bg-primary-700 rounded-full mr-3 flex items-center justify-center">
-              <span className="text-sm font-medium">RK</span>
+            <div className="w-8 h-8 bg-blue-700 rounded-full mr-3 flex items-center justify-center">
+              <span className="text-sm font-medium text-white">RK</span>
             </div>
             <div>
               <p className="text-sm">Rajesh Kumar</p>
@@ -67,8 +67,8 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             className="fixed inset-0 z-50 bg-black bg-opacity-50 md:hidden"
             onClick={onClose}
           ></div>
-          <aside className="fixed inset-y-0 left-0 z-50 w-64 bg-primary-800 text-white md:hidden">
-            <div className="flex items-center justify-between h-16 border-b border-primary-900 px-6">
+          <aside className="fixed inset-y-0 left-0 z-50 w-64 bg-blue-900 text-white md:hidden shadow-lg">
+            <div className="flex items-center justify-between h-16 border-b border-blue-950 bg-blue-950 px-6">
               <h1 className="text-xl font-bold">InvSync</h1>
               <button onClick={onClose} className="text-white">
                 <i className="ri-close-line text-xl"></i>
@@ -82,12 +82,12 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                       <a
                         className={`flex items-center px-6 py-3 text-white ${
                           location === item.path
-                            ? "bg-primary-900"
-                            : "hover:bg-primary-700"
+                            ? "bg-blue-950 border-l-4 border-blue-400"
+                            : "hover:bg-blue-800 border-l-4 border-transparent"
                         }`}
                         onClick={onClose}
                       >
-                        <i className={`${item.icon} mr-3 text-lg`}></i>
+                        <i className={`${item.icon} mr-3 text-lg ${location === item.path ? "text-blue-300" : "text-blue-300"}`}></i>
                         <span>{item.label}</span>
                       </a>
                     </Link>
@@ -95,10 +95,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 ))}
               </ul>
             </nav>
-            <div className="p-4 border-t border-primary-900">
+            <div className="p-4 border-t border-blue-950 bg-blue-950">
               <div className="flex items-center">
-                <div className="w-8 h-8 bg-primary-700 rounded-full mr-3 flex items-center justify-center">
-                  <span className="text-sm font-medium">RK</span>
+                <div className="w-8 h-8 bg-blue-700 rounded-full mr-3 flex items-center justify-center">
+                  <span className="text-sm font-medium text-white">RK</span>
                 </div>
                 <div>
                   <p className="text-sm">Rajesh Kumar</p>
