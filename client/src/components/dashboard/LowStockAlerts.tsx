@@ -42,7 +42,10 @@ export default function LowStockAlerts() {
   return (
     <div className="bg-white rounded-lg shadow overflow-hidden">
       <div className="px-4 py-3 bg-gray-50 border-b border-gray-200">
-        <h3 className="font-semibold text-gray-800">Low Stock Alerts</h3>
+        <h3 className="font-semibold text-gray-800 flex items-center">
+          <i className="ri-alert-line text-amber-500 mr-2"></i>
+          Low Stock Alerts
+        </h3>
       </div>
       <div className="p-4">
         {isLoading ? (

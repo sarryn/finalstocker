@@ -85,7 +85,10 @@ export default function RecentActivity() {
   return (
     <div className="bg-white rounded-lg shadow overflow-hidden">
       <div className="px-4 py-3 bg-gray-50 border-b border-gray-200">
-        <h3 className="font-semibold text-gray-800">Recent Activity</h3>
+        <h3 className="font-semibold text-gray-800 flex items-center">
+          <i className="ri-history-line text-blue-500 mr-2"></i>
+          Recent Activity
+        </h3>
       </div>
       <div className="p-4">
         {isLoading ? (

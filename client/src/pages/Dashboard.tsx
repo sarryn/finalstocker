@@ -46,9 +46,12 @@ export default function Dashboard() {
       {/* Filter Bar */}
       <div className="flex flex-col md:flex-row md:justify-between md:items-center space-y-3 md:space-y-0">
         <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
-          <div className="w-full md:w-48">
+          <div className="w-full md:w-48 relative">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <i className="ri-map-pin-line text-gray-500"></i>
+            </div>
             <select 
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
               value={selectedLocation}
               onChange={(e) => setSelectedLocation(e.target.value)}
             >
@@ -60,9 +63,12 @@ export default function Dashboard() {
               ))}
             </select>
           </div>
-          <div className="w-full md:w-48">
+          <div className="w-full md:w-48 relative">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <i className="ri-calendar-line text-gray-500"></i>
+            </div>
             <select 
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
               value={timeRange}
               onChange={(e) => setTimeRange(e.target.value)}
             >
@@ -129,7 +135,10 @@ export default function Dashboard() {
         {/* Sales Trend Chart */}
         <div className="bg-white p-4 rounded-lg shadow">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="font-semibold text-gray-800">Sales Trend (Last 30 Days)</h3>
+            <h3 className="font-semibold text-gray-800 flex items-center">
+              <i className="ri-line-chart-line text-green-500 mr-2"></i>
+              Sales Trend (Last 30 Days)
+            </h3>
             <div>
               <button className="text-sm text-gray-600 hover:text-primary-600 focus:outline-none">
                 <i className="ri-more-2-fill"></i>
@@ -142,7 +151,10 @@ export default function Dashboard() {
         {/* Inventory Status Chart */}
         <div className="bg-white p-4 rounded-lg shadow">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="font-semibold text-gray-800">Stock Status by Category</h3>
+            <h3 className="font-semibold text-gray-800 flex items-center">
+              <i className="ri-pie-chart-line text-purple-500 mr-2"></i>
+              Stock Status by Category
+            </h3>
             <div>
               <button className="text-sm text-gray-600 hover:text-primary-600 focus:outline-none">
                 <i className="ri-more-2-fill"></i>

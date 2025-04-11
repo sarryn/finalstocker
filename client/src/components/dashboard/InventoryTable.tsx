@@ -107,7 +107,10 @@ export default function InventoryTable() {
   return (
     <div className="bg-white rounded-lg shadow overflow-hidden">
       <div className="px-4 py-3 bg-gray-50 border-b border-gray-200 flex flex-col md:flex-row md:justify-between md:items-center space-y-3 md:space-y-0">
-        <h3 className="font-semibold text-gray-800">Inventory Summary</h3>
+        <h3 className="font-semibold text-gray-800 flex items-center">
+          <i className="ri-archive-line text-indigo-500 mr-2"></i>
+          Inventory Summary
+        </h3>
         <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2">
           <div className="relative">
             <input
@@ -248,11 +251,11 @@ export default function InventoryTable() {
         {totalPages > 1 && (
           <div className="flex space-x-1">
             <button 
-              className="px-3 py-1 border border-gray-300 rounded-md text-sm hover:bg-gray-50 disabled:opacity-50" 
+              className="px-3 py-1 border border-gray-300 rounded-md text-sm hover:bg-gray-50 disabled:opacity-50 flex items-center" 
               onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
               disabled={currentPage === 1}
             >
-              Previous
+              <i className="ri-arrow-left-s-line mr-1"></i> Previous
             </button>
             
             {Array.from({ length: Math.min(totalPages, 3) }, (_, i) => (
@@ -268,11 +271,11 @@ export default function InventoryTable() {
             ))}
             
             <button 
-              className="px-3 py-1 border border-gray-300 rounded-md text-sm hover:bg-gray-50 disabled:opacity-50"
+              className="px-3 py-1 border border-gray-300 rounded-md text-sm hover:bg-gray-50 disabled:opacity-50 flex items-center"
               onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
               disabled={currentPage === totalPages}
             >
-              Next
+              Next <i className="ri-arrow-right-s-line ml-1"></i>
             </button>
           </div>
         )}
