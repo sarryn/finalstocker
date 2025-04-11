@@ -127,8 +127,8 @@ export default function RecentActivity() {
           </div>
         )}
         <div className="mt-4">
-          <button className="w-full py-2 bg-primary-50 text-primary-700 rounded-md hover:bg-primary-100 focus:outline-none focus:ring-2 focus:ring-primary-500">
-            View All Activity
+          <button className="w-full py-2 bg-primary-50 text-primary-700 rounded-md hover:bg-primary-100 focus:outline-none focus:ring-2 focus:ring-primary-500 flex items-center justify-center">
+            <i className="ri-history-line mr-1"></i> View All Activity
           </button>
         </div>
       </div>

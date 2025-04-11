@@ -132,7 +132,9 @@ export default function InventoryTable() {
           <thead className="bg-gray-50">
             <tr>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Product Name
+                <div className="flex items-center">
+                  <i className="ri-shopping-bag-line mr-1"></i> Product Name
+                </div>
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 SKU

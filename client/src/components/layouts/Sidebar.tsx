@@ -32,8 +32,8 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             {menuItems.map((item) => (
               <li key={item.path}>
                 <Link href={item.path}>
-                  <a
-                    className={`flex items-center px-6 py-3 text-white ${
+                  <div
+                    className={`flex items-center px-6 py-3 text-white cursor-pointer ${
                       location === item.path
                         ? "bg-blue-950 border-l-4 border-blue-400"
                         : "hover:bg-blue-800 border-l-4 border-transparent"
@@ -41,7 +41,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                   >
                     <i className={`${item.icon} mr-3 text-lg ${location === item.path ? "text-blue-300" : "text-blue-300"}`}></i>
                     <span>{item.label}</span>
-                  </a>
+                  </div>
                 </Link>
               </li>
             ))}
@@ -79,8 +79,8 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 {menuItems.map((item) => (
                   <li key={item.path}>
                     <Link href={item.path}>
-                      <a
-                        className={`flex items-center px-6 py-3 text-white ${
+                      <div
+                        className={`flex items-center px-6 py-3 text-white cursor-pointer ${
                           location === item.path
                             ? "bg-blue-950 border-l-4 border-blue-400"
                             : "hover:bg-blue-800 border-l-4 border-transparent"
@@ -89,7 +89,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                       >
                         <i className={`${item.icon} mr-3 text-lg ${location === item.path ? "text-blue-300" : "text-blue-300"}`}></i>
                         <span>{item.label}</span>
-                      </a>
+                      </div>
                     </Link>
                   </li>
                 ))}

@@ -95,9 +95,9 @@ export default function LowStockAlerts() {
         )}
         <div className="mt-4">
           <Link href="/inventory">
-            <a className="w-full py-2 bg-primary-50 text-primary-700 rounded-md hover:bg-primary-100 focus:outline-none focus:ring-2 focus:ring-primary-500 block text-center">
-              View All Alerts
-            </a>
+            <div className="w-full py-2 bg-primary-50 text-primary-700 rounded-md hover:bg-primary-100 focus:outline-none focus:ring-2 focus:ring-primary-500 block text-center cursor-pointer">
+              <i className="ri-eye-line mr-1"></i> View All Alerts
+            </div>
           </Link>
         </div>
       </div>
