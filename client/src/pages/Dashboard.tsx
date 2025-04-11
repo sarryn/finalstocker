@@ -7,6 +7,7 @@ import InventoryStatusChart from "@/components/dashboard/InventoryStatusChart";
 import LowStockAlerts from "@/components/dashboard/LowStockAlerts";
 import RecentActivity from "@/components/dashboard/RecentActivity";
 import InventoryTable from "@/components/dashboard/InventoryTable";
+import AIForecastingSection from "@/components/dashboard/AIForecastingSection";
 
 export default function Dashboard() {
   const [selectedLocation, setSelectedLocation] = useState<string>("all");
@@ -150,6 +151,11 @@ export default function Dashboard() {
           </div>
           <InventoryStatusChart />
         </div>
+      </div>
+
+      {/* AI-Based Demand Forecasting Section */}
+      <div className="bg-white p-6 rounded-lg shadow border border-blue-100">
+        <AIForecastingSection />
       </div>
 
       {/* Low Stock Alerts & Recent Activity */}
