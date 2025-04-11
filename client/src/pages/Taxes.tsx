@@ -20,6 +20,16 @@ interface TaxReport {
 
 export default function Taxes() {
   const [activeTab, setActiveTab] = useState<'rates' | 'reports'>('rates');
+  const [baseAmount, setBaseAmount] = useState<number>(10000);
+  const [gstRate, setGstRate] = useState<number>(18);
+  const [transactionType, setTransactionType] = useState<'intra' | 'inter'>('intra');
+  const [calculationResult, setCalculationResult] = useState({
+    baseAmount: 10000,
+    cgst: 900,
+    sgst: 900,
+    igst: 0,
+    totalAmount: 11800
+  });
 
   // GST rates commonly used in India
   const gstRates: GstRate[] = [
@@ -39,12 +49,39 @@ export default function Taxes() {
     { id: 5, month: "August 2023", totalTax: 33500, status: "Pending", dueDate: "20th September 2023" },
   ];
 
+  // Function to calculate GST
+  const calculateGST = () => {
+    const gstAmount = baseAmount * (gstRate / 100);
+    
+    if (transactionType === 'intra') {
+      // For intra-state transactions, divide GST equally into CGST and SGST
+      const cgst = gstAmount / 2;
+      const sgst = gstAmount / 2;
+      setCalculationResult({
+        baseAmount,
+        cgst,
+        sgst,
+        igst: 0,
+        totalAmount: baseAmount + cgst + sgst
+      });
+    } else {
+      // For inter-state transactions, apply full GST as IGST
+      setCalculationResult({
+        baseAmount,
+        cgst: 0,
+        sgst: 0,
+        igst: gstAmount,
+        totalAmount: baseAmount + gstAmount
+      });
+    }
+  };
+
   // Format as Indian Rupees
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('en-IN', { 
       style: 'currency', 
       currency: 'INR',
-      maximumFractionDigits: 0
+      maximumFractionDigits: 2
     }).format(value);
   };
 
@@ -154,25 +191,136 @@ export default function Taxes() {
               </div>
 
               <div className="mt-8">
-                <h3 className="text-lg font-medium text-gray-800 mb-4">Tax Calculation Guide</h3>
+                <h3 className="text-lg font-medium text-gray-800 mb-4">GST Calculation Tool</h3>
                 <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                  <h4 className="font-medium text-gray-700 mb-2">How to calculate GST on products</h4>
-                  <ul className="list-disc pl-5 text-sm text-gray-600 space-y-1">
-                    <li>Identify the HSN code for your product</li>
-                    <li>Check the applicable GST rate for that HSN code</li>
-                    <li>Calculate CGST (Central GST) and SGST (State GST) each at half the GST rate</li>
-                    <li>For inter-state sales, apply IGST (Integrated GST) at the full rate</li>
-                  </ul>
-                  
-                  <div className="mt-4 bg-white p-3 rounded border border-gray-200">
-                    <p className="text-sm text-gray-700 font-medium">Example Calculation:</p>
-                    <p className="text-sm text-gray-600 mt-1">
-                      Product Price: ₹10,000<br />
-                      GST Rate: 18%<br />
-                      CGST (9%): ₹900<br />
-                      SGST (9%): ₹900<br />
-                      Total Price: ₹11,800
-                    </p>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {/* Left side: Calculator */}
+                    <div>
+                      <h4 className="font-medium text-gray-700 mb-3">GST Calculator</h4>
+                      <div className="space-y-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Base Amount (₹)</label>
+                          <input 
+                            type="number" 
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500" 
+                            placeholder="Enter amount without GST"
+                            value={baseAmount}
+                            onChange={(e) => setBaseAmount(Number(e.target.value))}
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">GST Rate (%)</label>
+                          <select 
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                            value={gstRate}
+                            onChange={(e) => setGstRate(Number(e.target.value))}
+                          >
+                            <option value="0">0% - Essential Items</option>
+                            <option value="5">5% - Basic Necessities</option>
+                            <option value="12">12% - Standard Rate</option>
+                            <option value="18">18% - Standard Rate</option>
+                            <option value="28">28% - Luxury Items</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Transaction Type</label>
+                          <div className="flex space-x-4">
+                            <label className="inline-flex items-center">
+                              <input 
+                                type="radio" 
+                                name="transactionType" 
+                                className="text-primary-600 focus:ring-primary-500" 
+                                checked={transactionType === 'intra'}
+                                onChange={() => setTransactionType('intra')}
+                              />
+                              <span className="ml-2 text-sm text-gray-700">Intra-state (CGST+SGST)</span>
+                            </label>
+                            <label className="inline-flex items-center">
+                              <input 
+                                type="radio" 
+                                name="transactionType" 
+                                className="text-primary-600 focus:ring-primary-500" 
+                                checked={transactionType === 'inter'}
+                                onChange={() => setTransactionType('inter')}
+                              />
+                              <span className="ml-2 text-sm text-gray-700">Inter-state (IGST)</span>
+                            </label>
+                          </div>
+                        </div>
+                        <button 
+                          className="w-full px-4 py-2 bg-primary-700 text-white rounded-md hover:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                          onClick={calculateGST}
+                        >
+                          Calculate
+                        </button>
+                      </div>
+                      
+                      <div className="mt-4 bg-white p-4 rounded border border-gray-200">
+                        <h5 className="text-sm font-medium text-gray-700 mb-2">Results</h5>
+                        <div className="grid grid-cols-2 gap-2 text-sm">
+                          <div className="text-gray-600">Base Amount:</div>
+                          <div className="font-medium text-gray-800">{formatCurrency(calculationResult.baseAmount)}</div>
+                          
+                          {transactionType === 'intra' ? (
+                            <>
+                              <div className="text-gray-600">CGST ({gstRate/2}%):</div>
+                              <div className="font-medium text-gray-800">{formatCurrency(calculationResult.cgst)}</div>
+                              
+                              <div className="text-gray-600">SGST ({gstRate/2}%):</div>
+                              <div className="font-medium text-gray-800">{formatCurrency(calculationResult.sgst)}</div>
+                            </>
+                          ) : (
+                            <>
+                              <div className="text-gray-600">IGST ({gstRate}%):</div>
+                              <div className="font-medium text-gray-800">{formatCurrency(calculationResult.igst)}</div>
+                            </>
+                          )}
+                          
+                          <div className="text-gray-600 font-medium">Total Amount:</div>
+                          <div className="font-medium text-green-700">{formatCurrency(calculationResult.totalAmount)}</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Right side: Info and Examples */}
+                    <div>
+                      <h4 className="font-medium text-gray-700 mb-3">How GST Works in India</h4>
+                      <ul className="list-disc pl-5 text-sm text-gray-600 space-y-2">
+                        <li>GST (Goods and Services Tax) replaced multiple indirect taxes in India and has five slabs: 0%, 5%, 12%, 18%, and 28%</li>
+                        <li>For intra-state transactions (within same state), GST is divided equally between CGST and SGST</li>
+                        <li>For inter-state transactions, IGST is charged at the full rate</li>
+                        <li>Every business with turnover above ₹40 lakhs (₹20 lakhs in some states) must register for GST</li>
+                        <li>GST registration number format: 22AAAAA0000A1Z5</li>
+                      </ul>
+                      
+                      <div className="mt-4">
+                        <h4 className="font-medium text-gray-700 mb-2">Common HSN Codes</h4>
+                        <div className="bg-white p-3 rounded border border-gray-200 text-sm">
+                          <div className="grid grid-cols-2 gap-2">
+                            <div className="text-gray-700">0402: Milk Products</div>
+                            <div className="text-gray-600">5% GST</div>
+                            
+                            <div className="text-gray-700">6309: Worn Clothing</div>
+                            <div className="text-gray-600">5% GST</div>
+                            
+                            <div className="text-gray-700">8471: Computers</div>
+                            <div className="text-gray-600">18% GST</div>
+                            
+                            <div className="text-gray-700">8517: Telephones</div>
+                            <div className="text-gray-600">18% GST</div>
+                            
+                            <div className="text-gray-700">8703: Motor Cars</div>
+                            <div className="text-gray-600">28% GST</div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="mt-4 bg-blue-50 p-3 rounded border border-blue-200">
+                        <p className="text-sm text-blue-800">
+                          <span className="font-medium">Tip:</span> Input Tax Credit (ITC) allows businesses to claim credit for GST paid on purchases from the GST charged on sales, reducing the overall tax burden.
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

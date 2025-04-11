@@ -147,6 +147,16 @@ export default function PaymentTracker() {
               {isLoading ? "--" : formatCurrency(totalDueAmount)}
             </h3>
           </div>
+          <div className="mt-2 pt-2 border-t border-gray-100">
+            <div className="flex justify-between text-xs">
+              <span className="text-gray-500">Pending</span>
+              <span className="font-medium text-gray-700">{formatCurrency(activeTab === 'receivable' ? 95000 : 78000)}</span>
+            </div>
+            <div className="flex justify-between text-xs mt-1">
+              <span className="text-gray-500">Partially Paid</span>
+              <span className="font-medium text-gray-700">{formatCurrency(activeTab === 'receivable' ? 30000 : 24000)}</span>
+            </div>
+          </div>
         </div>
         
         <div className="bg-white p-5 rounded-lg shadow">
@@ -154,8 +164,18 @@ export default function PaymentTracker() {
           <div className="flex items-center text-red-600">
             <IndianRupee className="w-5 h-5 mr-1" />
             <h3 className="text-2xl font-bold">
-              {isLoading ? "--" : formatCurrency(25000)}
+              {isLoading ? "--" : formatCurrency(activeTab === 'receivable' ? 25000 : 18000)}
             </h3>
+          </div>
+          <div className="mt-2 pt-2 border-t border-gray-100">
+            <div className="flex justify-between text-xs">
+              <span className="text-gray-500">30-60 days</span>
+              <span className="font-medium text-gray-700">{formatCurrency(activeTab === 'receivable' ? 15000 : 12000)}</span>
+            </div>
+            <div className="flex justify-between text-xs mt-1">
+              <span className="text-gray-500">60+ days</span>
+              <span className="font-medium text-gray-700">{formatCurrency(activeTab === 'receivable' ? 10000 : 6000)}</span>
+            </div>
           </div>
         </div>
         
@@ -164,8 +184,19 @@ export default function PaymentTracker() {
           <div className="flex items-center text-amber-600">
             <IndianRupee className="w-5 h-5 mr-1" />
             <h3 className="text-2xl font-bold">
-              {isLoading ? "--" : formatCurrency(15000)}
+              {isLoading ? "--" : formatCurrency(activeTab === 'receivable' ? 15000 : 22000)}
             </h3>
+          </div>
+          <div className="mt-2 pt-2 border-t border-gray-100">
+            <div className="flex justify-between text-xs">
+              <span className="text-gray-500">Upcoming</span>
+              <span className="font-medium text-gray-700">{formatCurrency(activeTab === 'receivable' ? 40000 : 32000)}</span>
+            </div>
+            <div className="mt-1">
+              <div className="relative h-1 w-full bg-gray-200 rounded-full overflow-hidden">
+                <div className="absolute h-full bg-amber-400" style={{ width: activeTab === 'receivable' ? '30%' : '40%' }}></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
